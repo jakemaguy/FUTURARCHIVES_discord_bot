@@ -53,25 +53,13 @@ bot = DiscordMessenger(webhook_url)
 
 if text == locked_string:
     if not store_closed:
-        webhook = DiscordWebhook(url=webhook_url, username="FUTUR.io")
-        embed = DiscordEmbed(title="Store Update", description="Store is closed", color=242424)
-        embed.add_embed_field(name="Website Link", value=url)
-        embed.set_timestamp()
-        webhook.add_embed(embed)
-        webhook.execute()
-        
+        bot.send_store_closed_message() 
+
         #update text file
         update_status_text_file("closed")
-    else:
-        bot.send_warning_message("The last post was a false alarm.  The store is still closed.")
 else:
     if store_closed:
-        webhook = DiscordWebhook(url=webhook_url, username="FUTUR.io")
-        embed = DiscordEmbed(title="Store Update", description="Store is now open", color=242424)
-        embed.add_embed_field(name="Website Link", value=url)
-        embed.set_timestamp()
-        webhook.add_embed(embed)
-        webhook.execute()
+        bot.send_store_open_message()
 
         # update text file
         update_status_text_file("open")
