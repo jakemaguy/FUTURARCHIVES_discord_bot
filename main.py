@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 import requests, bs4, re, os, smtplib, sys
-from discord_webhook import DiscordWebhook, DiscordEmbed
+from discord_messenger import DiscordMessenger
 
 #url = 'https://www.instagram.com/asweatyevening/?__a=1'
 #url = 'https://www.instagram.com/asweatyevening/'
@@ -48,6 +48,9 @@ if url_response == "[]":
 else:
     text = re.match(regex, url_response).groups()[0].strip()
 
+# Instanciate Discord Messager class
+bot = DiscordMessenger(webhook_url)
+
 if text == locked_string:
     if not store_closed:
         webhook = DiscordWebhook(url=webhook_url, username="FUTUR.io")
@@ -59,6 +62,8 @@ if text == locked_string:
         
         #update text file
         update_status_text_file("closed")
+    else:
+        bot.send_warning_message("The last post was a false alarm.  The store is still closed.")
 else:
     if store_closed:
         webhook = DiscordWebhook(url=webhook_url, username="FUTUR.io")
