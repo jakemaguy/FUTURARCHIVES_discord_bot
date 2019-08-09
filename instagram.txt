@@ -1,0 +1,19 @@
+'''
+curl "https://www.instagram.com/asweatyevening/?__a=1" 
+-H "authority: www.instagram.com" 
+-H "cache-control: max-age=0" 
+-H "upgrade-insecure-requests: 1" 
+-H "user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36" 
+-H "accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3" 
+-H "accept-encoding: gzip, deflate, br" 
+-H "accept-language: en-US,en;q=0.9" 
+-H "cookie: mid=XETTSwALAAFMchXklgSSh0VWmkNW; mcd=3; fbm_124024574287414=base_domain=.instagram.com; csrftoken=QT1Iz3dDx41gjsH77ExgIs2kUvcJeisJ; ds_user_id=3812542967; sessionid=3812542967^%^3A4TzMxO94TFGkWU^%^3A5; shbid=19808; shbts=1565316967.9739726; rur=FTW; urlgen=^\^"^{^\^\^\^"173.76.242.37^\^\^\^": 701^}:1hvv6v:5WHRuizFA6ObRtSqnN7yV51ZrIU^\^""
+--compressed
+'''
+
+
+header = {"authority": "www.instagram.com", "cache-control" : "max-age=0",
+"upgrade-insecure-requests" : "1", "user-agent" : "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36",
+"accept" : "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3",
+"accept-encoding" : "gzip, deflate, br", "accept-language" : "en-US,en;q=0.9",
+"cookie" : 'mid=XETTSwALAAFMchXklgSSh0VWmkNW; mcd=3; fbm_124024574287414=base_domain=.instagram.com; csrftoken=QT1Iz3dDx41gjsH77ExgIs2kUvcJeisJ; ds_user_id=3812542967; sessionid=3812542967^%^3A4TzMxO94TFGkWU^%^3A5; shbid=19808; shbts=1565316967.9739726; rur=FTW; urlgen=^\^"^{^\^\^\^"173.76.242.37^\^\^\^": 701^}:1hvv6v:5WHRuizFA6ObRtSqnN7yV51ZrIU^\^"'} 
