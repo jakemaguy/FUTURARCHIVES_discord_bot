@@ -41,7 +41,12 @@ r = requests.get(url=url)
 soup = bs4.BeautifulSoup(r.text, features="html.parser")
 
 url_response = str(soup.select('.password__form-heading'))
-text = re.match(regex, url_response).groups()[0].strip()
+
+# in the case when store opens, loading text is removed and html returns null or '[]'
+if url_response == "[]":
+    text = ""
+else:
+    text = re.match(regex, url_response).groups()[0].strip()
 
 if text == locked_string:
     if not store_closed:
