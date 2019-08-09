@@ -57,6 +57,8 @@ if text == 'L O A D I N G  .  .  .':
             message = "Script is running"
             server.sendmail(gmail_user, gmail_user, message)
             server.quit()
+        except Exception as e:
+            print (e)
 else:
     if store_closed:
         webhook = DiscordWebhook(url=webhook_url, username="FUTUR.io")
