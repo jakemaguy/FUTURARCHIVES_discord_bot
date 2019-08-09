@@ -5,7 +5,7 @@ from discord_webhook import DiscordWebhook, DiscordEmbed
 #url = 'https://www.instagram.com/asweatyevening/?__a=1'
 #url = 'https://www.instagram.com/asweatyevening/'
 url = 'https://futurarchives.com/password'
-webhook_url = 'https://discordapp.com/api/webhooks/609211859031162880/2lwMQfwGZute4hvN8HcBZMgudGy4whPhLRjUvjoIrh97fbO7O4Mtvsg-Fef9QFpw0nJo'
+webhook_url = os.eniron['WEBHOOK_URL']
 
 if (len(sys.argv) - 1) != 2:
     print("script <gmail_user> <gmail_password>")
