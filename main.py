@@ -52,16 +52,18 @@ while True:
     bot = DiscordMessenger(webhook_url)
 
     if text == locked_string:
-        if not store_closed:
+        if not store_closed: # store was open, but is now closed
             bot.send_store_closed_message() 
 
             #update text file
             update_status_text_file("closed")
+            store_closed = True
     else:
-        if store_closed:
+        if store_closed:  # store was closed but is now open
             bot.send_store_open_message()
 
             # update text file
             update_status_text_file("open")
+            store_closed = False
 
     time.sleep(sleep_seconds)
