@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-import requests, bs4, re, os, smtplib, sys, sleep
+import requests, bs4, re, os, smtplib, sys, time
 from discord_messenger import DiscordMessenger
 
 #url = 'https://www.instagram.com/asweatyevening/?__a=1'
@@ -8,12 +8,12 @@ from discord_messenger import DiscordMessenger
 url = 'https://futurarchives.com/password'
 #webook_url = os.environ['WEBHOOK_URL']
 
-if (len(sys.argv) - 1) != 3:
-    print("script <gmail_user> <gmail_password> <webhook_url")
-    exit(1)
-gmail_user = sys.argv[1]
-gmail_password = sys.argv[2]
-webhook_url = sys.argv[3]
+try:
+    gmail_user = os.environ['GMAIL']
+    gmail_password = os.environ['GMAIL_PASSWORD']
+    webhook_url = os.environ['WEBHOOK_URL']
+except Exception as e:
+    print(e)
 
 
 status_filepath = os.path.join(os.path.dirname(sys.argv[0]), "status.txt")
@@ -36,9 +36,8 @@ regex = r'\[\<.+\>\n\s+(.+)'
 locked_string = 'L O A D I N G  .  .  .'
 sleep_seconds = 5
 
-r = requests.get(url=url)
-
 while True:
+    r = requests.get(url=url)
     soup = bs4.BeautifulSoup(r.text, features="html.parser")
 
     url_response = str(soup.select('.password__form-heading'))
