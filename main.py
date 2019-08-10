@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-import requests, bs4, re, os, smtplib, sys
+import requests, bs4, re, os, smtplib, sys, sleep
 from discord_messenger import DiscordMessenger
 
 #url = 'https://www.instagram.com/asweatyevening/?__a=1'
@@ -34,32 +34,35 @@ with open(status_filepath, "r") as infile:
 
 regex = r'\[\<.+\>\n\s+(.+)'
 locked_string = 'L O A D I N G  .  .  .'
+sleep_seconds = 5
 
-payload = {'compression' : '--compressed'}
 r = requests.get(url=url)
 
-soup = bs4.BeautifulSoup(r.text, features="html.parser")
+while True:
+    soup = bs4.BeautifulSoup(r.text, features="html.parser")
 
-url_response = str(soup.select('.password__form-heading'))
+    url_response = str(soup.select('.password__form-heading'))
 
-# in the case when store opens, loading text is removed and html returns null or '[]'
-if url_response == "[]":
-    text = ""
-else:
-    text = re.match(regex, url_response).groups()[0].strip()
+    # in the case when store opens, loading text is removed and html returns null or '[]'
+    if url_response == "[]":
+        text = ""
+    else:
+        text = re.match(regex, url_response).groups()[0].strip()
 
-# Instanciate Discord Messager class
-bot = DiscordMessenger(webhook_url)
+    # Instanciate Discord Messager class
+    bot = DiscordMessenger(webhook_url)
 
-if text == locked_string:
-    if not store_closed:
-        bot.send_store_closed_message() 
+    if text == locked_string:
+        if not store_closed:
+            bot.send_store_closed_message() 
 
-        #update text file
-        update_status_text_file("closed")
-else:
-    if store_closed:
-        bot.send_store_open_message()
+            #update text file
+            update_status_text_file("closed")
+    else:
+        if store_closed:
+            bot.send_store_open_message()
 
-        # update text file
-        update_status_text_file("open")
+            # update text file
+            update_status_text_file("open")
+
+    time.sleep(sleep_seconds)
